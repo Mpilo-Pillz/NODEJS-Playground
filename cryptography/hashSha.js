@@ -1,7 +1,8 @@
 const { createHash } = require('crypto');
 
+// HAshes are not very secure
 function hash(input) {
-    // return createHash('sha256').update(input).digest('base64')
+    // return createHash('sha256').update(input).digest('base64') // not so secure
     return createHash('sha256').update(input).digest('hex');
 }
 
