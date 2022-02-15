@@ -13,3 +13,5 @@ const message2 = 'moo 🐮';
 const hmac2 = createHmac('sha256', key2).update(message).digest('hex');
 
 console.log(hmac2);
+
+// Same as hash but it requires a secret key
