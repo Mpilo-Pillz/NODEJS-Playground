@@ -1,8 +1,27 @@
 const express = require('express');
 const app = express();
+const path = require('path')
 
 app.use(express.urlencoded({extended: true}));
-app.use(express.json())
+app.use(express.json());
+app.set('views', path.join(__dirname, 'views'))
+app.set('view engine', 'ejs');
+
+const comments = [
+    {
+        username: "Thapelo",
+        comment: "Tubatse Thapelo"
+    },
+    {
+        username: "Life",
+        comment: "Lets make this move life"
+    }
+];
+
+app.get('/comments', (req, res) => {
+    res.render('comments/index')
+})
+
 app.get('/tacos', (req, res) => {
     res.send("GET /tacos response")
 });
@@ -14,4 +33,5 @@ app.post('/tacos', (req, res) => {
 
 app.listen(4000, () => {
     console.log("Serving on port 4000");
-})
+});
+
