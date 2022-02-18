@@ -8,5 +8,12 @@
 </head>
 <body>
     <h1>COmments</h1>
+    <ul>
+        <% for(let c of comments) {%>
+            <li>
+               <%=c.comment%> - <b><%= c.username %></b>
+            </li>
+            <% }%>
+    </ul>
 </body>
 </html>
