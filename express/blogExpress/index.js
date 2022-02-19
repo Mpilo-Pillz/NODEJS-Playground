@@ -30,7 +30,7 @@ app.post('/comments', (req, res) => {
     console.log(req.body);
     const {username, comment} = req.body;
     comments.push({username, comment});
-    res.send("IT WORKED");
+    res.redirect('/comments');
 });
 
 app.get('/tacos', (req, res) => {
@@ -38,7 +38,10 @@ app.get('/tacos', (req, res) => {
 });
 
 app.post('/tacos', (req, res) => {
-    console.log("req.body", req.body);
+    for (let key in req.body) {
+        console.log("Key-->", key);
+        console.log("Value-->", req.body[key]);
+    }
     res.send(`you sent a requet with this body: ${req.body}`)
 })
 
