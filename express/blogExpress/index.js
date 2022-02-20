@@ -1,10 +1,13 @@
 const express = require('express');
-const { v4: uuidv4 } = require('uuid');
 const app = express();
-const path = require('path')
+const path = require('path');
+const methodOverride = require('method-override');
+
+const { v4: uuidv4 } = require('uuid');
 
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
+app.use(methodOverride('_method'))
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'ejs');
 
@@ -44,8 +47,8 @@ app.post('/comments', (req, res) => {
 
 app.get('/comments/:id', (req, res) => {
     const { id } = req.params
-    // const comment = comments.find(c => c.id === id);
-    const comment = comments.find(c => c.id === parseInt(id));
+    const comment = comments.find(c => c.id === id);
+    // const comment = comments.find(c => c.id === parseInt(id));
     res.render('comments/show', { comment })
 });
 
@@ -58,6 +61,18 @@ app.patch('/comments/:id', (req, res) => {
 
     foundComment.comment = newCommentText
     res.redirect("/comments")
+});
+
+/**
+ * HTML forms can only send a get and post request not the other method
+ * below wew ill overide the methods to use the desired methods
+ */
+
+app.get('/comments/:id/edit', (req, res) => {
+    const { id } = req.params;
+    const comment = comments.find(c => c.id === id);
+    console.log("ICEMAN-->", comment);
+    res.render('comments/edit', { comment });
 })
 
 app.get('/tacos', (req, res) => {
