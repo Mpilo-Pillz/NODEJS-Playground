@@ -18,6 +18,11 @@ const comments = [
         id: "2",
         username: "Life",
         comment: "Lets make this move life"
+    },
+    {
+        id: "3",
+        username: "Patch Da Dawg",
+        comment: "Man this is an old comment"
     }
 ];
 
@@ -42,6 +47,17 @@ app.get('/comments/:id', (req, res) => {
     // const comment = comments.find(c => c.id === id);
     const comment = comments.find(c => c.id === parseInt(id));
     res.render('comments/show', { comment })
+});
+
+app.patch('/comments/:id', (req, res) => {
+    console.log(req.body.comment);
+
+    const { id } = req.params;
+    const newCommentText = req.body.comment;
+    const foundComment = comments.find(c => c.id === id);
+
+    foundComment.comment = newCommentText
+    res.redirect("/comments")
 })
 
 app.get('/tacos', (req, res) => {
