@@ -11,7 +11,8 @@ app.use(methodOverride('_method'))
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'ejs');
 
-const comments = [
+// was const before then we chenaged to let cos of filter in app.delete
+let comments = [
     {
         id: "1",
         username: "Thapelo",
@@ -73,6 +74,16 @@ app.get('/comments/:id/edit', (req, res) => {
     const comment = comments.find(c => c.id === id);
     console.log("ICEMAN-->", comment);
     res.render('comments/edit', { comment });
+})
+
+/**
+ * END
+ */
+
+app.delete('/comments/:id', (req, res) => {
+    const {id} = req.params;
+    comments = comments.filter(c => c.id !== id);
+    res.redirect('/comments');
 })
 
 app.get('/tacos', (req, res) => {
