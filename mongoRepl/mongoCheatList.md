@@ -28,3 +28,10 @@ Where we store our data
 ## find
 
 `db.collection.find()` - `db.dogs.find()` - `db.cats.find({name: {"Nuksy"}})`
+
+# findOne
+
+`db.collection.findOne({key: "Value"})`
+
+- `db.dogs.findOne({catFriendly: true})`
+- `db.cats.findOne({dogFriendly: false})`
