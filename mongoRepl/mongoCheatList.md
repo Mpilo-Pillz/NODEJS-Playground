@@ -60,5 +60,8 @@ Where we store our data
 `db.cats.find({ age: {$gt: 10}})`
 `db.cats.find({ age: {$lt: 3}})`
 
-`db.cats.find({ breed: {$in: ['Ginger']}})`
-`db.cats.find({ age: {$lt: 3}})`
+`db.cats.find({ breed: {$in: ['Ginger']}})` in
+`db.cats.find({ breed: {$nin: ['Ginger']}})` NOT in
+`db.cats.find({ breed: {$in: ['Ginger']}}, { age: {$lt: 3}})`
+
+`db.dogs.find({$or: [{'personality.catFriendly': true}, {age: {lte: 2}}]})`
