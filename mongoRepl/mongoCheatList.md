@@ -35,3 +35,19 @@ Where we store our data
 
 - `db.dogs.findOne({catFriendly: true})`
 - `db.cats.findOne({dogFriendly: false})`
+
+## UpdateOne
+
+`db.collection.updateOne({selector}, {$set: {}})`
+
+- `db.dogs.updateOne({name: "Makoti"}, {$set: {catFriendly: false}})`
+
+`db.collection.updateMany({dogFriendly: true}, {$set: {isAvailable: false}, $currentDate: {lastModified: true}})`
+
+## DELETE
+
+`db.collection.deleteOne()`
+
+- `db.cats.delete({name: "Garfield"})`
+- `db.dogs.deleteMany({isAvailable: false})`
+- `db.dogs.deleteMany({})` deletes all
