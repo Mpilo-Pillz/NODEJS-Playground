@@ -51,3 +51,14 @@ Where we store our data
 - `db.cats.delete({name: "Garfield"})`
 - `db.dogs.deleteMany({isAvailable: false})`
 - `db.dogs.deleteMany({})` deletes all
+
+# OPERATORS
+
+`db.cats.find({'personality.childFriendly': true, age: 12})`
+`db.cats.find({ age: {$lte: 5}})`
+`db.cats.find({ age: {$gte: 6}})`
+`db.cats.find({ age: {$gt: 10}})`
+`db.cats.find({ age: {$lt: 3}})`
+
+`db.cats.find({ breed: {$in: ['Ginger']}})`
+`db.cats.find({ age: {$lt: 3}})`
