@@ -65,3 +65,12 @@ Where we store our data
 `db.cats.find({ breed: {$in: ['Ginger']}}, { age: {$lt: 3}})`
 
 `db.dogs.find({$or: [{'personality.catFriendly': true}, {age: {lte: 2}}]})`
+
+# Mongose
+
+in node repl run
+`node`
+
+`.load index.js`
+
+`amadeus`
