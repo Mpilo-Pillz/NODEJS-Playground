@@ -34,5 +34,48 @@ const amadeus = new Movie({
     rating: 'R'
 })
 
-// amadeus.save();
+amadeus.save();
+
+Movie.insertMany([
+    {
+        title: 'Uncharted',
+        year: 2022,
+        score: 9.6,
+        rating: 'PG'
+    },
+    {
+        title: 'Spiderman Far From Home',
+        year: 2021,
+        score: 8.0,
+        rating: 'R'
+    },
+    {
+        title: 'Matrix: Ressuractions',
+        year: 2021,
+        score: 6.75,
+        rating: '16'
+    },
+    {
+        title: 'Scream 5',
+        year: 2022,
+        score: 8.2,
+        rating: 'R'
+    },
+    {
+        title: 'A Quiet Place 2',
+        year: 2021,
+        score: 10.0,
+        rating: 'R'
+    },
+    {
+        title: 'Soul',
+        year: 2020,
+        score: 9.5,
+        rating: 'A'
+    },
+])
+    .then(data => {
+        console.log("IT WORKED!");
+        console.log(data);
+    })
 
