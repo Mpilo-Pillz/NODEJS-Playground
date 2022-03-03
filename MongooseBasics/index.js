@@ -77,5 +77,5 @@ Movie.insertMany([
     .then(data => {
         console.log("IT WORKED!");
         console.log(data);
-    })
+    });
 
