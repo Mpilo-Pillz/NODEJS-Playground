@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const path = require('path');
+const methodOverride = require('method-override')
 const mongoose = require('mongoose');
 const Product = require('./models/product');
 
@@ -15,7 +16,8 @@ mongoose.connect('mongodb://localhost:27017/farmStand', { useNewUrlParser: true,
 // middleware
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
-app.use(express.urlencoded({ extended: true }))
+app.use(express.urlencoded({ extended: true }));
+app.use(methodOverride('_method'))
 
 const port = 4000;
 
@@ -44,7 +46,19 @@ app.get('/products/:id', async (req, res) => {
     console.log(product);
 });
 
+app.get('/products/:id/edit', async (req, res) => {
+    const { id } = req.params;
+    const product = await Product.findById(id);
+    res.render('products/edit', { product });
+});
 
+app.put('/products/:id', async (req, res) => {
+    const { id } = req.params;
+    console.log(id);
+    // force mongo to validate amd come back with new info
+    const product = await Product.findByIdAndUpdate(id, req.body, { runValidators: true, new: true })
+    res.redirect(`/products/${product._id}`);
+})
 
 app.listen(port, () => {
     console.log(` is listening on port ${port}`);
