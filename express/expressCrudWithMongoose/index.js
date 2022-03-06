@@ -19,6 +19,7 @@ app.set('view engine', 'ejs');
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride('_method'))
 
+const categories = ['dairy', 'fruit', 'vegetable'];
 const port = 4000;
 
 app.get('/products', async (req, res) => {
@@ -28,7 +29,7 @@ app.get('/products', async (req, res) => {
 });
 
 app.get('/products/new', (req, res) => {
-    res.render('products/new')
+    res.render('products/new', { categories })
 });
 
 app.post('/products', async (req, res) => {
