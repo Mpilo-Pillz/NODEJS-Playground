@@ -59,6 +59,12 @@ app.put('/products/:id', async (req, res) => {
     // force mongo to validate amd come back with new info
     const product = await Product.findByIdAndUpdate(id, req.body, { runValidators: true, new: true })
     res.redirect(`/products/${product._id}`);
+});
+
+app.delete('/products/:id', async (req, res) => {
+    const { id } = req.params;
+    await Product.findByIdAndDelete(id);
+    res.redirect('/products')
 })
 
 app.listen(port, () => {
