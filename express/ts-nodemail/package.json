@@ -1,0 +1,16 @@
+{
+  "name": "ts-nodemail",
+  "version": "1.0.0",
+  "description": "making email service with node mailer and typescript",
+  "main": "index.js",
+  "scripts": {
+    "start:build": "tsc -w",
+    "start:run": "nodemon build/index.js",
+    "start": "concurrently yarn:start:*"
+  },
+  "author": "Mpilo-Pillz",
+  "license": "ISC",
+  "dependencies": {
+    "concurrently": "^8.2.0"
+  }
+}
