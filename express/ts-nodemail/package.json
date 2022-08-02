@@ -6,7 +6,8 @@
   "scripts": {
     "start:build": "tsc -w",
     "start:run": "nodemon build/index.js",
-    "start": "concurrently yarn:start:*"
+    "start": "node build/index.js",
+    "start:dev": "concurrently yarn:start:*"
   },
   "author": "Mpilo-Pillz",
   "license": "ISC",
