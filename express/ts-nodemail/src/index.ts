@@ -1,13 +1,6 @@
-import express, { Request, Response } from "express";
+import app from "./app";
 
-const app = express();
-const PORT = process.env.PORT || 4300;
-
-app.get("/", (req: Request, res: Response) => {
-  res.send(`<div>
-    <h1>Server online</h1>
-    </div>`);
-});
+const PORT = process.env.PORT || 8080;
 
 app.listen(PORT, () => {
   console.log(`Listening on port ${PORT}`);
