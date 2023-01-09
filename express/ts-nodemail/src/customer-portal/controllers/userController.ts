@@ -4,8 +4,13 @@ import { AuthUser, loginService } from "../services/userService";
 import generateToken from "../utils/generateToken";
 import HttpError from "../models/http-error";
 import bcrypt from "bcrypt";
+import { validationResult } from "express-validator";
 
-const login = async (req: Request, res: Response, next: NextFunction) => {
+export const login = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   const { email, password } = req.body;
 
   let existingUser;
@@ -41,4 +46,70 @@ const login = async (req: Request, res: Response, next: NextFunction) => {
     user: existingUser.email,
     token: generateToken(existingUser.id, email),
   });
+};
+
+export const register = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  const { name, email, password, address } = req.body;
+  let existingUser;
+  let hashedPassword;
+  let token;
+
+  const errors = validationResult(req);
+
+  if (!errors.isEmpty()) {
+    res.status(422).json({ message: errors });
+
+    return next(
+      new HttpError("Invalid inputs passed, please check your data.", 422)
+    );
+  }
+
+  try {
+    existingUser = await User.findOne({ email });
+  } catch (err) {
+    return next(
+      new HttpError("Signing up failed, please try again later", 500)
+    );
+  }
+
+  if (existingUser) {
+    return next(
+      new HttpError("User exists already, please login instead", 422)
+    );
+  }
+
+  try {
+    hashedPassword = await bcrypt.hash(password, 12);
+  } catch (err) {
+    return next(new HttpError("Could not create user, please try again.", 500));
+  }
+
+  const createdUser = new User({
+    name,
+    email,
+    address,
+    password: hashedPassword,
+    places: [],
+  });
+
+  try {
+    await createdUser.save();
+  } catch (err) {
+    return next(new HttpError("Signing up failed, please try again.", 500));
+  }
+
+  try {
+    token = generateToken(createdUser.id, email);
+  } catch (err) {
+    console.log(err);
+
+    return next(new HttpError("Signing up failed, please try again.", 500));
+  }
+  res
+    .status(201)
+    .json({ userId: createdUser.id, email: createdUser.email, token });
 };
