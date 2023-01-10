@@ -1,8 +1,19 @@
 import mongoose from "mongoose";
 
+interface User {
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
+}
+
 const userSchema = new mongoose.Schema(
   {
-    name: {
+    firstName: {
+      type: String,
+      required: true,
+    },
+    lastName: {
       type: String,
       required: true,
     },
@@ -20,6 +31,8 @@ const userSchema = new mongoose.Schema(
       required: true,
       default: false,
     },
+    products: [{ type: mongoose.Types.ObjectId, ref: "Product" }],
+    address: { type: mongoose.Types.ObjectId, ref: "Address" },
   },
   { timestamps: true }
 );
