@@ -53,7 +53,7 @@ export const register = async (
   res: Response,
   next: NextFunction
 ) => {
-  const { name, email, password, address } = req.body;
+  const { firstName, lastName, email, password } = req.body;
   let existingUser;
   let hashedPassword;
   let token;
@@ -89,9 +89,9 @@ export const register = async (
   }
 
   const createdUser = new User({
-    name,
+    firstName,
+    lastName,
     email,
-    address,
     password: hashedPassword,
     places: [],
   });
