@@ -93,7 +93,8 @@ export const register = async (
     lastName,
     email,
     password: hashedPassword,
-    places: [],
+    address: [],
+    products: [],
   });
 
   try {
