@@ -1,6 +1,7 @@
 import express, { Request, Response } from "express";
 import dotenv from "dotenv";
 import connectDB from "./config/db";
+import userRouter from "./customer-portal/routes/userRoutes";
 
 dotenv.config();
 
@@ -28,5 +29,7 @@ app.get("/", (req: Request, res: Response) => {
     <h1>Server online</h1>
     </div>`);
 });
+
+app.use("/api/portal/users", userRouter);
 
 export default app;
