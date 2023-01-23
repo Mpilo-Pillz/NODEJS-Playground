@@ -11,3 +11,5 @@ userRouter.post("/register", [
   check("password").isLength({ min: 8 }),
   register,
 ]);
+
+export default userRouter;
