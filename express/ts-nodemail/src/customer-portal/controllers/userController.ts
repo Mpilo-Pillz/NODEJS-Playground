@@ -58,7 +58,7 @@ export const register = async (
   let hashedPassword;
   let token;
 
-  const errors = validationResult(req);
+  const errors = validationResult(req.body);
 
   if (!errors.isEmpty()) {
     res.status(422).json({ message: errors });
@@ -100,6 +100,8 @@ export const register = async (
   try {
     await createdUser.save();
   } catch (err) {
+    console.log("Err-->", err);
+
     return next(new HttpError("Signing up failed, please try again.", 500));
   }
 
