@@ -32,7 +32,7 @@ const userSchema = new mongoose.Schema(
       default: false,
     },
     products: [{ type: mongoose.Types.ObjectId, ref: "Product" }],
-    address: { type: mongoose.Types.ObjectId, ref: "Address" },
+    address: [{ type: mongoose.Types.ObjectId, ref: "Address" }],
   },
   { timestamps: true }
 );
