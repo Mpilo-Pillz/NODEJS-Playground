@@ -3,13 +3,15 @@ import User from "../models/userModel";
 import HttpError from "../models/http-error";
 import bcrypt from "bcrypt";
 
-export const login = async (
-  req: Request,
-  res: Response,
+export interface AuthUser {
+  userId: string;
+  user: string;
+}
+export const loginService = async (
+  email: string,
+  password: string,
   next: NextFunction
-) => {
-  const { email, password } = req.body;
-
+): Promise<void | AuthUser> => {
   let existingUser;
 
   try {
@@ -38,8 +40,5 @@ export const login = async (
     return next(new HttpError("Invalid Credentials", 403));
   }
 
-  let token;
-
-  try {
-  } catch (error) {}
+  return { userId: existingUser.id, user: existingUser.email } as AuthUser;
 };
