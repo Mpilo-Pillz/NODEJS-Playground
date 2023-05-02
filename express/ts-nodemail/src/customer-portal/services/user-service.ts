@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import User from "../models/userModel";
+import User from "../models/user-model";
 import HttpError from "../models/http-error";
 import bcrypt from "bcrypt";
 
