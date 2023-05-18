@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from "express";
-import User from "../models/userModel";
-import { AuthUser, loginService } from "../services/userService";
-import generateToken from "../utils/generateToken";
+import User from "../models/user-model";
+import { AuthUser, loginService } from "../services/user-service";
+import generateToken from "../utils/generate-token";
 import HttpError from "../models/http-error";
 import bcrypt from "bcrypt";
 import { validationResult } from "express-validator";
