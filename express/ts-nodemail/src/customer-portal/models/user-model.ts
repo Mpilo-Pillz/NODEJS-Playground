@@ -1,10 +1,13 @@
 import mongoose from "mongoose";
+import { IAddress } from "../types/address-types";
 
 interface User {
   firstName: string;
   lastName: string;
   email: string;
   password: string;
+  products: any[];
+  addresses: IAddress[];
 }
 
 const userSchema = new mongoose.Schema(
@@ -32,7 +35,7 @@ const userSchema = new mongoose.Schema(
       default: false,
     },
     products: [{ type: mongoose.Types.ObjectId, ref: "Product" }],
-    address: [{ type: mongoose.Types.ObjectId, ref: "Address" }],
+    addresses: [{ type: mongoose.Types.ObjectId, ref: "Address" }],
   },
   { timestamps: true }
 );
