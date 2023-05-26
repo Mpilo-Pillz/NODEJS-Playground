@@ -1,7 +1,8 @@
 import express, { Request, Response } from "express";
 import dotenv from "dotenv";
 import connectDB from "./config/db";
-import userRouter from "./customer-portal/routes/userRoutes";
+import userRouter from "./customer-portal/routes/user-routes";
+import addressRouter from "./customer-portal/routes/address-routes";
 
 dotenv.config();
 
@@ -30,6 +31,11 @@ app.get("/", (req: Request, res: Response) => {
     </div>`);
 });
 
+app.post("/", (req: Request, res: Response) => {
+  res.status(200).send("OK");
+});
+
 app.use("/api/portal/users", userRouter);
+app.use("/api/portal/address", addressRouter);
 
 export default app;
