@@ -4,8 +4,11 @@ import {
   createAddress,
   getAddressesByUserId,
 } from "../controllers/address-controller";
+import checkAuth from "../middleware/check-auth";
 
 const addressRouter = Router();
+
+addressRouter.use(checkAuth);
 
 addressRouter.get("/get-addresses", getAddressesByUserId);
 addressRouter.post("/create-address", [
