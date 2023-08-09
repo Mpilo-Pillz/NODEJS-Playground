@@ -45,6 +45,7 @@ export const login = async (
     userId: existingUser.id,
     user: existingUser.email,
     token: generateToken(existingUser.id, email),
+    address: existingUser.addresses,
   });
 };
 

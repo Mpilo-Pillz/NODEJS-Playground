@@ -11,6 +11,7 @@ const addressRouter = Router();
 addressRouter.use(checkAuth);
 
 addressRouter.get("/get-addresses", getAddressesByUserId);
+addressRouter.get("/:uid", getAddressesByUserId);
 addressRouter.post("/create-address", [
   check("streetNumber").not().isEmpty(),
   check("streetName").not().isEmpty(),
