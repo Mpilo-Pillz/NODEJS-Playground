@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import connectDB from "./config/db";
 import userRouter from "./customer-portal/routes/user-routes";
 import addressRouter from "./customer-portal/routes/address-routes";
+import productRouter from "./customer-portal/routes/product-routes";
 
 dotenv.config();
 
@@ -37,5 +38,6 @@ app.post("/", (req: Request, res: Response) => {
 
 app.use("/api/portal/users", userRouter);
 app.use("/api/portal/address", addressRouter);
+app.use("/api/portal/products", productRouter);
 
 export default app;
