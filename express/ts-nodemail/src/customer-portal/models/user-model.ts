@@ -36,6 +36,7 @@ const userSchema = new mongoose.Schema(
     },
     products: [{ type: mongoose.Types.ObjectId, ref: "Product" }],
     addresses: [{ type: mongoose.Types.ObjectId, ref: "Address" }],
+    invoices: [{ type: mongoose.Types.ObjectId, ref: "Invoice" }],
   },
   { timestamps: true }
 );

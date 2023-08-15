@@ -4,6 +4,7 @@ import User from "../models/user-model";
 import HttpError from "../models/http-error";
 import { CheckAuthRequest } from "../types/user-types";
 import { validationResult } from "express-validator";
+import { requestToPay } from "../services/mobileMoneyService";
 
 export const getInvoiceByUserId = async (
   req: Request,
@@ -63,6 +64,7 @@ export const updateInvoiceToPaid = async (
   next: NextFunction
 ) => {
   const errors = validationResult(req);
+  const { amount, cellphone } = req.body;
 
   if (!errors.isEmpty()) {
     console.log(errors);
@@ -93,7 +95,14 @@ export const updateInvoiceToPaid = async (
     );
     return next(error);
   }
-  if (invoice) {
+
+  const paymentResponse = await requestToPay(amount, cellphone);
+
+  if (paymentResponse.status === 401) {
+    return next(paymentResponse);
+  }
+
+  if (invoice && paymentResponse) {
     invoice.isPaid = true;
   }
 
