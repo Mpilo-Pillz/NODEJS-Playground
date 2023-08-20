@@ -17,7 +17,8 @@ export const getInvoiceByUserId = async (
   let userWithInvoices: any;
 
   try {
-    userWithInvoices = await User.findById(userId).populate("invoices");
+    // userWithInvoices = await User.findById(userId).populate("invoices");
+    userWithInvoices = await Invoice.find({ userAccount: userId });
   } catch (err) {
     const error = new HttpError(
       "Fetching invoices failed, please try again later",
@@ -26,16 +27,14 @@ export const getInvoiceByUserId = async (
     return next(error);
   }
 
-  if (!userWithInvoices || userWithInvoices.invoices.length === 0) {
-    return next(
-      new HttpError("Could not find invoices for the provided user id.", 404)
-    );
-  }
+  //   if (!userWithInvoices || userWithInvoices.invoices.length === 0) {
+  //     return next(
+  //       new HttpError("Could not find invoices for the provided user id.", 404)
+  //     );
+  //   }
 
   res.json({
-    invoices: userWithInvoices.invoices.map((invoices: any) =>
-      invoices.toObject({ getters: true })
-    ),
+    invoices: userWithInvoices,
   });
 };
 

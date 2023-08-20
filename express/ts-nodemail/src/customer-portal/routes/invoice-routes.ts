@@ -12,9 +12,9 @@ const invoiceRouter = Router();
 
 invoiceRouter.use(checkAuth);
 
-invoiceRouter.get("/get-addresses", getInvoiceByUserId);
+invoiceRouter.get("/:uid", getInvoiceByUserId);
 invoiceRouter.patch("/:uid", updateInvoiceToPaid);
-invoiceRouter.post("/create-address", [
+invoiceRouter.post("/create-invoice", [
   check("userAccount").not().isEmpty(),
   check("charge").not().isEmpty(),
   check("usage").not().isEmpty(),
