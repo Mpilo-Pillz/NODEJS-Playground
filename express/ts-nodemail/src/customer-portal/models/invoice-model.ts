@@ -10,6 +10,7 @@ const invoiceSchema = new Schema({
   charge: { type: String, required: true },
   isPaid: { type: Boolean, requred: true, default: false },
   userAccount: { type: mongoose.Types.ObjectId, required: true, ref: "User" },
+  address: { type: mongoose.Types.ObjectId, required: true, ref: "Address" },
 });
 
 const Invoice = mongoose.model<IInvoice>("Invoice", invoiceSchema);

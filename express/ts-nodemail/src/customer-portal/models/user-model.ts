@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import { IAddress } from "../types/address-types";
+import Subscription from "./subscriptions-models";
 
 interface User {
   firstName: string;
@@ -34,6 +35,7 @@ const userSchema = new mongoose.Schema(
       required: true,
       default: false,
     },
+    subscriptions: [{ type: mongoose.Types.ObjectId, ref: "Subscription" }],
     products: [{ type: mongoose.Types.ObjectId, ref: "Product" }],
     addresses: [{ type: mongoose.Types.ObjectId, ref: "Address" }],
     invoices: [{ type: mongoose.Types.ObjectId, ref: "Invoice" }],

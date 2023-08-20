@@ -96,6 +96,7 @@ export const register = async (
     password: hashedPassword,
     address: [],
     products: [],
+    subscription: [],
   });
 
   try {
@@ -115,5 +116,10 @@ export const register = async (
   }
   res
     .status(201)
-    .json({ userId: createdUser.id, email: createdUser.email, token });
+    .json({
+      userId: createdUser.id,
+      email: createdUser.email,
+      token,
+      subscriptions: createdUser.subscriptions,
+    });
 };

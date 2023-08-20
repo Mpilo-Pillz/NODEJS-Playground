@@ -11,4 +11,5 @@ const addressSchema = new Schema({
   creator: { type: mongoose.Types.ObjectId, required: true, ref: "User" },
 });
 
-export default mongoose.model<IAddress>("Address", addressSchema);
+const Address = mongoose.model<IAddress>("Address", addressSchema);
+export default Address;

@@ -44,7 +44,7 @@ export const createInvoice = async (
   res: Response,
   next: NextFunction
 ) => {
-  const { serviceType, date, usage, charge, userAccount } = req.body;
+  const { serviceType, date, usage, charge, userAccount, address } = req.body;
 
   const invoice = new Invoice({
     serviceType,
@@ -52,6 +52,7 @@ export const createInvoice = async (
     usage,
     charge,
     userAccount,
+    address,
   });
 
   const createdInvoice = await invoice.save();

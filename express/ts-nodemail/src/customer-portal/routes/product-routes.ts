@@ -4,8 +4,6 @@ import { getProducts, createProduct } from "../controllers/product-controller";
 
 const productRouter = Router();
 
-// productRouter.use(checkAuth);
-
 productRouter
   .get("/get-products", getProducts)
   .post("/create-product", createProduct);

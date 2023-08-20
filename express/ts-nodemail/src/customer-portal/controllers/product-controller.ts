@@ -6,6 +6,16 @@ export const getProducts = async (
   res: Response,
   next: NextFunction
 ) => {
+  const products = await Product.find();
+
+  res.json({ products });
+};
+
+export const getPaginatedProducts = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   const pageSize = 10;
   const page = Number(req.query.pageNumber) || 1;
 

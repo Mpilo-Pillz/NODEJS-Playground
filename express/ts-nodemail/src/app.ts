@@ -5,6 +5,7 @@ import userRouter from "./customer-portal/routes/user-routes";
 import addressRouter from "./customer-portal/routes/address-routes";
 import productRouter from "./customer-portal/routes/product-routes";
 import invoiceRouter from "./customer-portal/routes/invoice-routes";
+import subscriptionRouter from "./customer-portal/routes/subscription-routes";
 
 dotenv.config();
 
@@ -41,5 +42,6 @@ app.use("/api/portal/users", userRouter);
 app.use("/api/portal/address", addressRouter);
 app.use("/api/portal/products", productRouter);
 app.use("/api/portal/invoice", invoiceRouter);
+app.use("/api/portal/subscription", subscriptionRouter);
 
 export default app;
