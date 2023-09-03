@@ -24,7 +24,7 @@ export const login = async (
   }
 
   if (!existingUser) {
-    return next(new HttpError("Invalid Credentials", 403));
+    return res.status(401).json({ message: "Invalid Credentials", code: 401 });
   }
 
   let isValidPassword;
@@ -38,7 +38,7 @@ export const login = async (
   }
 
   if (!isValidPassword) {
-    return next(new HttpError("Invalid Credentials", 403));
+    return res.status(401).json({ message: "Invalid Credentials", code: 401 });
   }
 
   res.json({
@@ -114,12 +114,10 @@ export const register = async (
 
     return next(new HttpError("Signing up failed, please try again.", 500));
   }
-  res
-    .status(201)
-    .json({
-      userId: createdUser.id,
-      email: createdUser.email,
-      token,
-      subscriptions: createdUser.subscriptions,
-    });
+  res.status(201).json({
+    userId: createdUser.id,
+    email: createdUser.email,
+    token,
+    subscriptions: createdUser.subscriptions,
+  });
 };
