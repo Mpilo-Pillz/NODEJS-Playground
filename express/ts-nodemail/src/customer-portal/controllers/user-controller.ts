@@ -78,9 +78,12 @@ export const register = async (
   }
 
   if (existingUser) {
-    return next(
-      new HttpError("User exists already, please login instead", 422)
-    );
+    return res
+      .status(422)
+      .json({
+        message: "User exists already, please login instead",
+        code: 422,
+      });
   }
 
   try {
