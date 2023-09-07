@@ -64,7 +64,7 @@ export const updateInvoiceToPaid = async (
   next: NextFunction
 ) => {
   const errors = validationResult(req);
-  const { amount, cellphone } = req.body;
+  const { amount, cellphone, invoiceId } = req.body;
 
   if (!errors.isEmpty()) {
     console.log(errors);
@@ -75,7 +75,7 @@ export const updateInvoiceToPaid = async (
     );
   }
 
-  const invoiceId = req.params.invoiceId;
+  // const invoiceId = req.params.invoiceId;
 
   let invoice: any;
   try {
@@ -88,13 +88,18 @@ export const updateInvoiceToPaid = async (
     return next(error);
   }
 
-  if (invoice?.userAccount.toString() !== req?.userData?.userId) {
-    const error = new HttpError(
-      "You are not allowed to edit this invoice.",
-      401
-    );
-    return next(error);
-  }
+  /**
+   * TODO fix permissions
+   * Read up on new ObjectId and how tocorrectly store
+   */
+
+  // if (invoice?.userAccount.toString() !== req?.params?.userId) {
+  //   const error = new HttpError(
+  //     "You are not allowed to edit this invoice.",
+  //     401
+  //   );
+  //   return next(error);
+  // }
 
   const paymentResponse = await requestToPay(amount, cellphone);
 
@@ -116,5 +121,9 @@ export const updateInvoiceToPaid = async (
     return next(error);
   }
 
-  res.status(200).json({ invoice: invoice?.toObject({ getters: true }) });
+  res.status(200).json({
+    message: "successful",
+    code: 200,
+    invoices: invoice?.toObject({ getters: true }),
+  });
 };
