@@ -4,6 +4,7 @@ import { validationResult } from "express-validator";
 import HttpError from "../models/http-error";
 import Subscription from "../models/subscriptions-models";
 import mongoose from "mongoose";
+import Invoice from "../models/invoice-model";
 
 export interface CheckAuthRequest extends Request {
   userData?: {
@@ -98,8 +99,19 @@ export const addSubscriptionToUser = async (
     sess.startTransaction();
     await subscription.save({ session: sess });
     // TODO - fix typing
-    user.subscriptions.push(subscription);
+    await user.subscriptions.push(subscription);
     await user.save({ session: sess });
+
+    const invoice = new Invoice({
+      serviceType: plan,
+      date: startDate,
+      usage: "unlimited",
+      charge: monthlyFee,
+      userAccount: req?.params?.userId,
+      address,
+    });
+
+    await invoice.save();
     await sess.commitTransaction();
   } catch (err) {
     console.log(err);
@@ -111,5 +123,5 @@ export const addSubscriptionToUser = async (
     return next(error);
   }
 
-  res.status(201).json({ subscriptions: user.subscription });
+  res.status(201).json({ message: "Success" });
 };
