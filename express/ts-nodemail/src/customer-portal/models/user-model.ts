@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 import { IAddress } from "../types/address-types";
 import Subscription from "./subscriptions-models";
+import { customerPortalConnect } from "../../config/db";
 
 interface User {
   firstName: string;
@@ -43,6 +44,6 @@ const userSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-const User = mongoose.model("User", userSchema);
+const User = customerPortalConnect.model("User", userSchema);
 
 export default User;

@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import { ISubscription } from "../types/subscription-types";
+import { customerPortalConnect } from "../../config/db";
 
 const Schema = mongoose.Schema;
 
@@ -17,7 +18,7 @@ const subscriptionSchema = new Schema({
   creator: { type: mongoose.Types.ObjectId, required: true, ref: "User" },
 });
 
-const Subscription = mongoose.model<ISubscription>(
+const Subscription = customerPortalConnect.model<ISubscription>(
   "Subscription",
   subscriptionSchema
 );
