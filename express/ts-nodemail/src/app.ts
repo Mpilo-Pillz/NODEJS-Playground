@@ -1,11 +1,14 @@
 import express, { Request, Response } from "express";
 import dotenv from "dotenv";
-import connectDB from "./config/db";
+import { connectDB } from "./config/db";
 import userRouter from "./customer-portal/routes/user-routes";
 import addressRouter from "./customer-portal/routes/address-routes";
 import productRouter from "./customer-portal/routes/product-routes";
 import invoiceRouter from "./customer-portal/routes/invoice-routes";
 import subscriptionRouter from "./customer-portal/routes/subscription-routes";
+import trainingRouter from "./vee-one-cv/routes/trainingRoutes";
+import toolsRouter from "./vee-one-cv/routes/toolsRoutes";
+import summaryRouter from "./vee-one-cv/routes/summaryRoutes";
 
 dotenv.config();
 
@@ -43,5 +46,9 @@ app.use("/api/portal/address", addressRouter);
 app.use("/api/portal/products", productRouter);
 app.use("/api/portal/invoice", invoiceRouter);
 app.use("/api/portal/subscription", subscriptionRouter);
+
+app.use("/api/v1/cv/training", trainingRouter);
+app.use("/api/v1/cv/tool", toolsRouter);
+app.use("/api/v1/cv/summary", summaryRouter);
 
 export default app;
