@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 import { IAddress } from "../types/address-types";
 import { IProduct } from "../types/product-types";
+import { customerPortalConnect } from "../../config/db";
 
 const Schema = mongoose.Schema;
 const reviewSchema = new Schema(
@@ -72,5 +73,5 @@ const productSchema = new Schema(
   }
 );
 
-const Product = mongoose.model<IProduct>("Product", productSchema);
+const Product = customerPortalConnect.model<IProduct>("Product", productSchema);
 export default Product;

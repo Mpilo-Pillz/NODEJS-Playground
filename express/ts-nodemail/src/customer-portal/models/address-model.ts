@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import { IAddress } from "../types/address-types";
+import { customerPortalConnect } from "../../config/db";
 
 const Schema = mongoose.Schema;
 
@@ -11,5 +12,5 @@ const addressSchema = new Schema({
   creator: { type: mongoose.Types.ObjectId, required: true, ref: "User" },
 });
 
-const Address = mongoose.model<IAddress>("Address", addressSchema);
+const Address = customerPortalConnect.model<IAddress>("Address", addressSchema);
 export default Address;
